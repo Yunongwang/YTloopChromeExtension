@@ -1,0 +1,2 @@
+# YTloopChromeExtension
+loop youtube videos
