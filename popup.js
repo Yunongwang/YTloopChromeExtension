@@ -16,7 +16,6 @@ function updateStatus(boolvalue){
 
 chrome.tabs.executeScript(null, {file: "checkloopstatus.js"},function(results){
     var firstScriptResult = results[0];
-    console.log(firstScriptResult);
     updateStatus(firstScriptResult);
 });
 
@@ -24,7 +23,6 @@ chrome.tabs.executeScript(null, {file: "checkloopstatus.js"},function(results){
 loopButton.onclick = function(element) {
     chrome.tabs.executeScript(null, {file: "content.js"},function(results){
         var firstScriptResult = results[0];
-        console.log(firstScriptResult);
         updateStatus(firstScriptResult);
 
     });

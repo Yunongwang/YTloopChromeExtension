@@ -2,7 +2,7 @@
     "name": "Youtube looper",
     "version": "1.0",
     "description": "loop your favorite yt video",
-    "permissions": ["activeTab","declarativeContent","storage"],
+    "permissions": ["activeTab","declarativeContent"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
