@@ -1,32 +1,29 @@
-let changeColor = document.getElementById('startloop');
-var loopStatus = true;
-
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-
-});
-
-function updateStatus(){
+function updateStatus(boolvalue){
     chrome.tabs.query({active: true, currentWindow: true}, ([tab]) => {
-        
-        chrome.storage.sync.get('IsLooping', function(data) {
-            loopStatus = data.IsLooping;
-            console.log(this.loopStatus);
-          });
-        console.log(loopStatus);
 
-        if (loopStatus){
-            document.getElementById('loopStatus').textContent = "loop On";
-        } else {
-            document.getElementById('loopStatus').textContent = "loop off";
-        }
-    });
+
+            if (boolvalue){
+                document.getElementById('loopStatus').textContent = "loop On";
+            } else {
+                document.getElementById('loopStatus').textContent = "loop off";
+            }
+        });
+
 }
 
-updateStatus();
+chrome.tabs.executeScript(null, {file: "checkloopstatus.js"},function(results){
+    var firstScriptResult = results[0];
+    console.log(firstScriptResult);
+    updateStatus(firstScriptResult);
+});
+
 
 changeColor.onclick = function(element) {
-    chrome.tabs.executeScript(null, {file: "content.js"});
-    updateStatus();
+    chrome.tabs.executeScript(null, {file: "content.js"},function(results){
+        var firstScriptResult = results[0];
+        console.log(firstScriptResult);
+        updateStatus(firstScriptResult);
+
+    });
+    
 };
